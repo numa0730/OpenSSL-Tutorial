@@ -3,20 +3,22 @@ cmake_minimum_required (VERSION 3.13)
 cmake_policy(SET CMP0076 NEW)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
-#set(CMAKE_VERBOSE_MAKEFILE 1)
+set(CMAKE_VERBOSE_MAKEFILE 1)
 
 enable_language(CXX)
 set(CMAKE_CXX_STANDARD 14) # C++14
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_SUPPRESS_REGENERATION true)
 
-#include(FindOpenSSL)
 find_package(OpenSSL REQUIRED)
 if(NOT OPENSSL_FOUND)
 	message(FATAL_ERROR "Fail to find OpenSSL") # exit
 endif()
-include_directories(${OPENSSL_INCLUDE_DIR})
+
+message(STATUS "OPENSSL_LIBRARIES: ${OPENSSL_LIBRARIES}")
 message(STATUS "OPENSSL_INCLUDE_DIR: ${OPENSSL_INCLUDE_DIR}")
+message(STATUS "OPENSSL_CRYPTO_LIBRARY: ${OPENSSL_CRYPTO_LIBRARY}")
+include_directories(${OPENSSL_INCLUDE_DIR})
 
 add_subdirectory(src)
 
