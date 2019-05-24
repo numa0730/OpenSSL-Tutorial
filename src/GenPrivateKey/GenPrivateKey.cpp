@@ -17,6 +17,7 @@ int main()
 	int iterations = 10000; // as of 2019, should be higher than 10,000
 	unsigned char salt[16]; // random for protecting from directional attack
 	RAND_bytes(salt, 16);
+	//memset(salt, 0, 16); // Please Uncomment For you want to generate same key
 
 	unsigned char privatekey[16]; // derived private key, 16byte=128bit
 
@@ -35,27 +36,9 @@ int main()
 	}
 
 	// ---------------------------------------------------------------------------
-	// Generate private key automatically
+	// Generate private key from random
 	// ---------------------------------------------------------------------------
 	RAND_bytes(privatekey, 16);
-
-	// ---------------------------------------------------------------------------
-	// Secure way to store private key (PKCS#8)
-	// ---------------------------------------------------------------------------
-
-	/*
-	if (EVP_CIPHER_CTX_init(&c))
-	{
-		EVP_EncryptInit(&c, EVP_aes_128_ecb(), password, nullptr);
-		EVP_EncryptUpdate(&context, encrypt.data(), &len, message,
-			static_cast<int>(str.length() + EVP_MAX_BLOCK_LENGTH));
-		EVP_EncryptFinal(&context, encrypt.data() + len, &len);
-
-		EVP_CIPHER_CTX_cleanup(&c); // erase EVP_CIPHER_CTX
-	}
-	*/
-
-
 
 	return 0;
 }
